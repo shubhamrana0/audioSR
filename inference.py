@@ -134,7 +134,7 @@ class Predictor(BasePredictor):
 
         reconstructed_audio = np.stack(reconstructed_channels, axis=-1) if is_stereo else reconstructed_channels[0]
 
-        print(f"multiband_ensemble = {multiband_ensemble}")
+        print(f"double check multiband_ensemble = {multiband_ensemble}")
         if multiband_ensemble:
             low, _ = librosa.load(input_file, sr=48000, mono=False)
             output = match_array_shapes(reconstructed_audio[0].T, low)

@@ -184,6 +184,16 @@ class Predictor(BasePredictor):
         gc.collect()
         torch.cuda.empty_cache()
 
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Audio super-resolution inference.")
     parser.add_argument("--input", help="Path to input audio file")
@@ -193,7 +203,7 @@ if __name__ == "__main__":
     parser.add_argument("--guidance_scale", help="Guidance scale value", type=float, required=False, default=3.5)
     parser.add_argument("--seed", help="Seed value, 0 = random seed", type=int, required=False, default=0)
     parser.add_argument("--overlap", help="Overlap value", type=float, required=False, default=0.04)
-    parser.add_argument("--multiband_ensemble", type=bool, help="Use multiband ensemble with input")
+    parser.add_argument("--multiband_ensemble", type=str2bool, help="Use multiband ensemble with input")
     parser.add_argument("--input_cutoff", help="Define the crossover of audio input in the multiband ensemble", type=int, required=False, default=12000)
     parser.add_argument("--model_name", help="Model name to use", type=str, required=False, default="basic", choices=["basic", "speech"])
 

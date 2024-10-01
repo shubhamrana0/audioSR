@@ -141,7 +141,7 @@ class Predictor(BasePredictor):
 
             low = lr_filter(low.T, crossover_freq, 'lowpass', order=10)
             high = lr_filter(output.T, crossover_freq, 'highpass', order=10)
-            high = lr_filter(high, 23000, 'lowpass', order=2)
+            high = lr_filter(high, 16000, 'lowpass', order=2)
 
             output = low + high
         else:
